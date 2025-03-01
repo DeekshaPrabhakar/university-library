@@ -3,6 +3,7 @@
 import React from 'react';
 import AuthForm from '@/components/AuthForm';
 import { signInSchema } from '@/lib/validations';
+import { signInWithCredentials } from '@/lib/actions/auth';
 
 const Page = () => (
   <AuthForm
@@ -12,10 +13,7 @@ const Page = () => (
       email: '',
       password: '',
     }}
-    onSubmit={async (data) => {
-      console.log('sign in');
-      return { success: true };
-    }}
+    onSubmit={signInWithCredentials}
   />
 );
 

@@ -15,7 +15,7 @@ const {
 
 const authenticator = async () => {
   try {
-    const response = await fetch(`${config.env.apiEndpoint}/api/auth/imagekit`);
+    const response = await fetch(`${config.env.apiEndpoint}/auth/imagekit`);
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -89,20 +89,16 @@ const FileUpload = ({
   const onValidate = (file: File) => {
     if (type === 'image') {
       if (file.size > 20 * 1024 * 1024) {
-        toast({
-          title: 'File size too large',
+        toast('File size too large', {
           description: 'Please upload a file that is less than 20MB in size',
-          variant: 'destructive',
         });
 
         return false;
       }
     } else if (type === 'video') {
       if (file.size > 50 * 1024 * 1024) {
-        toast({
-          title: 'File size too large',
+        toast('File size too large', {
           description: 'Please upload a file that is less than 50MB in size',
-          variant: 'destructive',
         });
         return false;
       }
@@ -178,7 +174,7 @@ const FileUpload = ({
           />
         ) : type === 'video' ? (
           <IKVideo
-            path={file.filePath}
+            path={file.filePath || undefined}
             controls={true}
             className="h-96 w-full rounded-xl"
           />
